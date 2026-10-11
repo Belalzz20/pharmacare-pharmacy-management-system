@@ -1,0 +1,594 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f0f0;
+    font-family: 'Avenir', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.login {
+    background-image: url('../images/login.webp');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.inventory {
+    background-image: url('../images/inventory.webp');
+}
+
+.userLogin {
+    background-image: url('../images/userlogin.jpeg');
+}
+
+.userRegister {
+    background-image: url('../images/userRegister.jpeg');
+}
+
+.login::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.login .content {
+    position: relative;
+    z-index: 1;
+}
+
+.login .content h1 {
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.login .content form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login .content form h5 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 1rem;
+}
+
+.inputBox {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.inputBox label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.inputBox textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.inputBox textarea:focus {
+    outline: none;
+    border-color: #8e44ad;
+}
+
+.inputBox select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+}
+
+.inputBox input:focus {
+    outline: none;
+    border-color: #8e44ad;
+}
+
+.login .content button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login .content form .registerLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+
+nav {
+    background-color: #95a5a6;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 40px;
+}
+
+nav h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+nav img {
+    width: 100px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0px 20px;
+    display: block;
+}
+
+nav .logout {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.page {
+    padding: 40px;
+}
+
+.page .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page .head a {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.page .content {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
+.page .count {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 1rem;
+    flex: 1;
+}
+
+.page .count img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.page .data {
+    display: block;
+    padding: 0 !important;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 4;
+}
+
+.card table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.card table th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.card table th,
+td a {
+    color: #000;
+    text-decoration: none;
+}
+
+.card table th,
+td img {
+    width: 40px;
+}
+
+.card table th {
+    background-color: #f0f0f0;
+}
+
+.card table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.card table button,
+.card table a {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.addPage .content {
+    width: 60%;
+    margin: auto;
+}
+
+.saveBtn {
+    background-color: #8e44ad;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 17px;
+}
+
+.note {
+    margin-bottom: 1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+.mainNavBar {
+    background-color: transparent;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.hero {
+    background-image: url('../images/hero.jpg');
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 3rem;
+    padding-top: 7rem;
+}
+
+.hero .content {
+    flex: 1;
+}
+
+.hero .content h1 {
+    flex: 1;
+    color: #fff;
+    font-size: 3rem;
+}
+
+.hero .content p {
+    flex: 1;
+    color: #fff;
+    width: 60%;
+    margin-top: 1rem;
+}
+
+.hero .content .searchView {
+    /* display: flex;
+    align-items: center;
+    width: 60%;
+    margin-top: 2rem; */
+}
+
+.hero .content form {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-top: 2rem;
+}
+
+.hero .content .searchView input {
+    all: unset;
+    background-color: #fff;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px 0 0 8px;
+    margin-bottom: 0;
+    flex: 2;
+}
+
+.hero .content .searchView button{
+    all: unset;
+    margin: 0 !important;
+    background-color: #1bc768;
+    padding: 14px;
+    border-radius: 0 8px 8px 0;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.hero .image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    background-color: #1bc768;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1;
+    text-decoration: none;
+}
+
+.section {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.section h4 {
+    font-size: 36px;
+    color: #043caa;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.section h4::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 5px;
+    border-radius: 8px;
+    background-color: #043caa;
+}
+
+.section h4::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(50%);
+    width: 40px;
+    height: 5px;
+    border-radius: 8px;
+    background-color: #1bc768;
+    z-index: 1;
+    transition: 0.3s;
+}
+
+.section h4:hover::before {
+    transform: translateX(-150%);
+}
+
+.logos {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7rem;
+}
+
+.data .content {
+    text-align: left;
+}
+
+.data .content h3 {
+    color: #043caa;
+    font-size: 26px;
+    margin-bottom: 1rem;
+}
+
+.data .content ul {
+    list-style-image: url('../images/exclude.jpg');
+    padding: 0 2rem;
+}
+
+.data .content ul li {
+    margin-bottom: 1rem;
+}
+
+.data:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+footer {
+    background-color: #043caa;
+    color: #fff;
+    padding: 4rem 6rem 0;
+}
+
+footer .content {
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+footer .content .main {
+    flex: 2;
+
+}
+
+footer .content .main h4 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+footer .content .main p {
+    opacity: 0.8;
+}
+
+footer .content .data {
+    display: flex;
+    gap: 2rem;
+    flex: 3;
+}
+
+footer .content .links h6 {
+    font-size: 18px;
+}
+
+footer .content .links a {
+    display: block;
+    font-size: 15px;
+    opacity: 0.8;
+    margin-top: 10px;
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .copyRight {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.medicine {
+    margin: 50px auto;
+    width: 80%;
+    background-color: #f8f8f8;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.medicine .image {
+    flex: 1;
+}
+
+.medicine .content {
+    flex: 1;
+}
+
+.medicine h5 {
+    font-size: 30px;
+    margin-bottom: 1rem;
+}
+
+.medicine img {
+    width: 300px;
+    height: auto;
+}
+
+.medicine p {
+    margin-bottom: 1rem;
+}
+
+.medicine a {
+    text-decoration: none;
+}
+
+.areYou {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin-top: 2rem;
+}
+
+.areYou a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    width: 60%;
+    margin: auto;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.success {
+    width: 70px;
+}
