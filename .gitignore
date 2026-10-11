@@ -1,0 +1,26 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Editor and IDE files
+.vscode/
+.idea/
+
+# Temporary and log files
+*.log
+*.tmp
+*.bak
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated files
+vendor/
+node_modules/
+
+# Database backups
+*.bak.sql
+*.dump
