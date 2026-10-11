@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <!-- <link rel="stylesheet" href="index.css" /> -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Avenir:wght@400;500;800;900&display=swap" />
+    <title>medicines - Walaa Al-Saadi Pharmacy</title>
+</head>
+
+<body>
+    <nav class="mainNavBar">
+        <img src="/images/logo.png">
+        <ul>
+            <li><a href="/index.html">home</a></li>
+            <li><a href="/medicines.html">medicines</a></li>
+            <li><a href="/cart.html">Cart</a></li>
+        </ul>
+        <a id="loginLogoutBtn" class="btn" href="/login.php">Login</a>
+    </nav>
+    <div class="hero">
+        <div class="content">
+            <h1>We can get your Drug <br /> Prescriptions to You</h1>
+            <p>We have all the drugs your doctor prescribed for your health and what’s more, we can get it to you. </p>
+            <div class="searchView">
+                <form action="medicines.html" method="get">
+                    <input type="text" name="query" placeholder="Search for drugs in our store" />
+                    <button type="submit">Find drug</button>
+                </form>
+            </div>
+        </div>
+        <div class="image">
+            <img src="/images/man.png" alt="">
+        </div>
+    </div>
+    <div class="affiliations section">
+        <h4>Our Affiliations</h4>
+        <div class="logos">
+            <img alt="" src="/images/logo1.png">
+            <img alt="" src="/images/logo2.png">
+            <img alt="" src="/images/logo3.png">
+        </div>
+    </div>
+    <div class="section" style="padding-bottom: 0;">
+		<h4>Medicines</h4>
+
+    </div>
+
+    <div class="medicines" id="medicinesContainer">
+
+    </div>
+
+    <footer>
+        <div class="content">
+            <div class="main">
+                <h4>D-Express</h4>
+                <p>Your favourite online pharmacy store. We offer onsite delivery and your health is our priority</p>
+            </div>
+            <div class="data">
+                <div class="links">
+                    <h6>Quick links</h6>
+                    <a href="/admin/index.php">admin Login</a>
+					<a href="/inventory/index.php">Employee Login</a>
+                </div>
+                <div class="links">
+                    <h6>Services</h6>
+                    <a href="">Delivery</a>
+                    <a href="">Purchase</a>
+                    <a href="">Consult Specialist</a>
+                </div>
+                <div class="links">
+                    <h6>Social Media</h6>
+                    <a href="">Facebook</a>
+                    <a href="">Twitter</a>
+                    <a href="">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyRight">
+            <span>Designed by sophisticateddev. copyright©</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var user = localStorage.getItem('user');
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/backend/user/getMedicines.php', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    var medicines = JSON.parse(xhr.responseText);
+                    
+                    var medicinesContainer = document.getElementById('medicinesContainer');
+                    medicines.forEach(function (medicine) {
+                        var div = document.createElement('div');
+                        div.classList.add('medicine');
+                        div.innerHTML = `
+                            <div class="image">
+                                <img src="${medicine.image}" alt="">
+                            </div>
+                            <div class="content">
+                                <h5>${medicine.name}</h5>
+                                <p>${medicine.description}</p>
+                                <p>Quantity: ${medicine.quantity} </p>
+                                <p>Price: ${medicine.price} EGP </p>
+                                <a class="btn" href="${user ? '#' : '/login.php'}" data-id="${medicine.id}" data-name="${medicine.name}" data-price="${medicine.price}">
+                                    ${user ? 'Add to Cart' : 'Login'}
+                                </a>
+                            </div>
+                        `;
+                        medicinesContainer.appendChild(div);
+                    });
+    
+
+                    if (user) {
+                        document.querySelectorAll('.btn').forEach(function (btn) {
+                            btn.addEventListener('click', function (event) {
+                                event.preventDefault();
+                                var medicineId = this.getAttribute('data-id');
+                                var medicineName = this.getAttribute('data-name');
+                                var medicinePrice = this.getAttribute('data-price');
+    
+                                var cart = JSON.parse(localStorage.getItem('cart')) || [];
+                                var existingItem = cart.find(item => item.id === medicineId);
+                                if (existingItem) {
+                                    existingItem.quantity += 1;
+                                } else {
+                                    cart.push({ id: medicineId, name: medicineName, price: parseFloat(medicinePrice), quantity: 1 });
+                                }
+                                localStorage.setItem('cart', JSON.stringify(cart));
+                                alert('Medicine added to cart!');
+                            });
+                        });
+                    }
+                }
+            };
+            xhr.send();
+        });
+    </script>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const loginLogoutBtn = document.getElementById('loginLogoutBtn');
+                const user = localStorage.getItem('user'); 
+    
+                if (user) {
+                    loginLogoutBtn.textContent = 'Logout';
+                    loginLogoutBtn.style.backgroundColor = '#c0392b';
+                    loginLogoutBtn.href = '/logout.php'; 
+                    loginLogoutBtn.addEventListener('click', function(event) {
+                        event.preventDefault();
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('cart');
+                        window.location.href = '/index.html'; 
+                    });
+                }
+            });
+        </script>
+</body>
+
+</html>

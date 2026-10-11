@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Avenir:wght@400;500;800;900&display=swap" />
+    <title>Walaa Al-Saadi Pharmacy</title>
+</head>
+
+<body>
+    <nav class="mainNavBar">
+        <img src="/images/logo.png">
+        <ul>
+            <li><a href="/index.html">home</a></li>
+            <li><a href="/medicines.html">medicines</a></li>
+            <li><a href="/cart.html">Cart</a></li>
+
+        </ul>
+        <a id="loginLogoutBtn" class="btn" href="/login.php">Login</a>
+    </nav>
+    <div class="hero">
+        <div class="content">
+            <h1>We can get your Drug <br /> Prescriptions to You</h1>
+            <p>We have all the drugs your doctor prescribed for your health and what’s more, we can get it to you. </p>
+            <div class="searchView">
+                <form action="medicines.html" method="get">
+                    <input type="text" name="query" placeholder="Search for drugs in our store" />
+                    <button type="submit">Find drug</button>
+                </form>
+            </div>
+        </div>
+        <div class="image">
+            <img src="/images/man.png" alt="">
+        </div>
+    </div>
+    <div class="affiliations section">
+        <h4>Our Affiliations</h4>
+        <div class="logos">
+            <img alt="" src="/images/logo1.png">
+            <img alt="" src="/images/logo2.png">
+            <img alt="" src="/images/logo3.png">
+        </div>
+    </div>
+    <div class="section data">
+        <div class="content">
+            <h3>All your Medicine needs in one place </h3>
+            <ul>
+                <li>Search and find all kinds of drugs</li>
+                <li>We have drugs for special case treatments</li>
+                <li>Get notified when your drug is available</li>
+            </ul>
+        </div>
+        <div class="image">
+            <img src="/images/1.png" alt="">
+        </div>
+    </div>
+    <div class="section data">
+        <div class="content">
+            <h3>Get your drugs at your doorstep </h3>
+            <ul>
+                <li>Get delivery to your doorstep</li>
+                <li>Deliver within 24hrs of request</li>
+                <li>We guarantee speedily response</li>
+            </ul>
+        </div>
+        <div class="image">
+            <img src="/images/2.png" alt="">
+        </div>
+    </div>
+    <div class="section data">
+        <div class="content">
+            <h3>Set up your profile and get refill easily </h3>
+            <ul>
+                <li>When you are a member your refill is easier</li>
+                <li>With one click your medicine is on its way to you</li>
+                <li>Get notified when your drug is available</li>
+            </ul>
+        </div>
+        <div class="image">
+            <img src="/images/3.png" alt="">
+        </div>
+    </div>
+    <footer>
+        <div class="content">
+            <div class="main">
+                <h4>D-Express</h4>
+                <p>Your favourite online pharmacy store. We offer onsite delivery and your health is our priority</p>
+            </div>
+            <div class="data">
+                <div class="links">
+                    <h6>Quick links</h6>
+                    <a href="/admin/index.php">admin Login</a>
+                    <a href="/inventory/index.php">Employee Login</a>
+                </div>
+                <div class="links">
+                    <h6>Services</h6>
+                    <a href="">Delivery</a>
+                    <a href="">Purchase</a>
+                    <a href="">Consult Specialist</a>
+                </div>
+                <div class="links">
+                    <h6>Social Media</h6>
+                    <a href="">Facebook</a>
+                    <a href="">Twitter</a>
+                    <a href="">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyRight">
+            <span>Designed by sophisticateddev. copyright©</span>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginLogoutBtn = document.getElementById('loginLogoutBtn');
+            const user = localStorage.getItem('user'); 
+
+            if (user) {
+                loginLogoutBtn.textContent = 'Logout';
+				loginLogoutBtn.style.backgroundColor = '#c0392b';
+                loginLogoutBtn.href = '/logout.php'; 
+                loginLogoutBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('cart');
+                    window.location.href = '/index.html'; 
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

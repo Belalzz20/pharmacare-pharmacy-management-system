@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Avenir:wght@400;500;800;900&display=swap" />
+    <title>Cart - Walaa Al-Saadi Pharmacy</title>
+</head>
+
+<body>
+    <nav class="mainNavBar">
+        <img src="/images/logo.png">
+        <ul>
+            <li><a href="/index.html">home</a></li>
+            <li><a href="/medicines.html">medicines</a></li>
+            <li><a href="/cart.html">Cart</a></li>
+        </ul>
+        <a id="loginLogoutBtn" class="btn" href="/login.php">Login</a>
+    </nav>
+    <div class="hero">
+        <div class="content">
+            <h1>We can get your Drug <br /> Prescriptions to You</h1>
+            <p>We have all the drugs your doctor prescribed for your health and what’s more, we can get it to you. </p>
+            <div class="searchView">
+                <form action="medicines.html" method="get">
+                    <input type="text" name="query" placeholder="Search for drugs in our store" />
+                    <button type="submit">Find drug</button>
+                </form>
+            </div>
+        </div>
+        <div class="image">
+            <img src="/images/man.png" alt="">
+        </div>
+    </div>
+    <div class="section">
+        <h4>Your Cart</h4>
+        <div id="cartContainer">
+
+        </div>
+        <button id="buyBtn" class="btn">Buy</button>
+    </div>
+    <footer>
+        <div class="content">
+            <div class="main">
+                <h4>D-Express</h4>
+                <p>Your favourite online pharmacy store. We offer onsite delivery and your health is our priority</p>
+            </div>
+            <div class="data">
+                <div class="links">
+                    <h6>Quick links</h6>
+                    <a href="/admin/index.php">admin Login</a>
+                    <a href="/inventory/index.php">Employee Login</a>
+                </div>
+                <div class="links">
+                    <h6>Services</h6>
+                    <a href="">Delivery</a>
+                    <a href="">Purchase</a>
+                    <a href="">Consult Specialist</a>
+                </div>
+                <div class="links">
+                    <h6>Social Media</h6>
+                    <a href="">Facebook</a>
+                    <a href="">Twitter</a>
+                    <a href="">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyRight">
+            <span>Designed by sophisticateddev. copyright©</span>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginLogoutBtn = document.getElementById('loginLogoutBtn');
+            const user = localStorage.getItem('user');
+            const cartContainer = document.getElementById('cartContainer');
+            const buyBtn = document.getElementById('buyBtn');
+
+            if (user) {
+                loginLogoutBtn.textContent = 'Logout';
+                loginLogoutBtn.style.backgroundColor = '#c0392b';
+                loginLogoutBtn.href = '/logout.php';
+                loginLogoutBtn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    localStorage.removeItem('cart');
+                    localStorage.removeItem('user');
+                    window.location.href = '/index.html';
+                });
+
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (cart.length === 0) {
+                    cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+                    buyBtn.style.display = 'none';
+                } else {
+                    let totalPrice = 0;
+                    cart.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('cart-item');
+                        itemDiv.innerHTML = `
+                            <p>${item.name} - ${item.quantity} x ${item.price} EGP</p>
+                        `;
+                        cartContainer.appendChild(itemDiv);
+                        totalPrice += item.quantity * item.price;
+                    });
+                    const totalDiv = document.createElement('div');
+                    totalDiv.classList.add('cart-total');
+                    totalDiv.innerHTML = `<p>Total Price: ${totalPrice} EGP</p>`;
+                    cartContainer.appendChild(totalDiv);
+                    
+                    buyBtn.addEventListener('click', function() {
+                        const user = JSON.parse(localStorage.getItem('user'));
+                        const orderData = {
+                            userId: user.id,
+                            userName: user.name,
+                            medicines: cart,
+                            totalPrice: totalPrice
+                        };
+
+                        fetch('/backend/user/placeOrder.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(orderData)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Order placed successfully!');
+                                localStorage.removeItem('cart');
+                                window.location.href = '/success.html';
+                            } else {
+                                alert('Failed to place order. Please try again.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    });
+                }
+            } else {
+                cartContainer.innerHTML = '<p>Please <a href="/login.php">login</a> to view your cart.</p>';
+                buyBtn.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
